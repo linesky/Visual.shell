@@ -57,9 +57,7 @@ class DrawingApp:
             self.start_x = event.x
             self.start_y = event.y
             self.current_rect = self.canvas.create_rectangle(self.start_x, self.start_y, self.start_x, self.start_y, outline="white")
-            # Solicitar nome e comando para o retângulo
-            self.temp_name = input("Digite o nome do objeto: ")
-            self.temp_run = input("Digite o comando shell a ser executado (opcional): ")
+           
     
     def on_drag(self, event):
         """Atualiza o tamanho do retângulo enquanto o mouse é arrastado."""
@@ -72,6 +70,9 @@ class DrawingApp:
             x1, y1, x2, y2 = self.canvas.coords(self.current_rect)
             w = abs(x2 - x1)
             h = abs(y2 - y1)
+             # Solicitar nome e comando para o retângulo
+            self.temp_name = input("Digite o nome do objeto: ")
+            self.temp_run = input("Digite o comando shell a ser executado (opcional): ")
             # Adiciona retângulo à lista com as informações de nome e comando
             self.object_list.append({
                 "x": min(x1, x2), "y": min(y1, y2), "w": w, "h": h, 
