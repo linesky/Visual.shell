@@ -45,6 +45,11 @@ class DrawingApp:
         self.canvas.bind("<Button-1>", self.on_click)
         self.canvas.bind("<B1-Motion>", self.on_drag)
         self.canvas.bind("<ButtonRelease-1>", self.on_release)
+        n=0
+        for n in range(0,320,10):
+            self.canvas.create_line(n,0,n,240,fill = "grey")
+            if n<240:
+                self.canvas.create_line(0,n,320,n,fill = "grey")
     
     def new_canvas(self):
         """Limpa a área de desenho e a lista de objetos."""
@@ -54,8 +59,8 @@ class DrawingApp:
     def on_click(self, event):
         """Inicia o desenho de um retângulo."""
         if len(self.object_list) < self.max_objects:
-            self.start_x = event.x
-            self.start_y = event.y
+            self.start_x = int(event.x/10)*10
+            self.start_y = int(event.y/10)*10
             self.current_rect = self.canvas.create_rectangle(self.start_x, self.start_y, self.start_x, self.start_y, outline="white")
            
     
@@ -91,6 +96,11 @@ class DrawingApp:
     def redraw_objects(self):
         """Redesenha todos os objetos no canvas."""
         self.canvas.delete("all")
+        n=0
+        for n in range(0,320,10):
+            self.canvas.create_line(n,0,n,240,fill = "grey")
+            if n<240:
+                self.canvas.create_line(0,n,320,n,fill = "grey")
         for obj in self.object_list:
             self.canvas.create_rectangle(obj["x"], obj["y"], obj["x"] + obj["w"], obj["y"] + obj["h"], outline="white")
             self.canvas.create_text(obj["x"] + obj["w"] / 2, obj["y"] + obj["h"] / 2, text=obj["name"], fill="white")
